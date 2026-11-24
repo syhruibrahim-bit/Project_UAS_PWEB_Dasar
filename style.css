@@ -1,0 +1,165 @@
+
+/* PENGATURAN DASAR */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #333333;
+}
+
+
+/* NAVBAR */
+.navbar {
+    background-color: white;
+    padding: 20px 8%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    color: #660033;
+}
+
+.navbar ul {
+    list-style-type: none;
+    display: flex;
+    gap: 25px;
+}
+
+.navbar a {
+    color: #333333;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar a:hover,
+.navbar a.active {
+    color: #550000;
+}
+
+
+/* BAGIAN PEMBUKA */
+.banner {
+    background-color: #550000;
+    color: white;
+    padding: 90px 8%;
+}
+
+.banner h1 {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.banner p {
+    font-size: 17px;
+    margin-bottom: 30px;
+}
+
+
+/* TOMBOL */
+.tombol,
+.tombol-kedua {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.tombol {
+    background-color: white;
+    color: #660033;
+}
+
+.tombol-kedua {
+    border: 1px solid white;
+    color: white;
+}
+
+
+/* STATISTIK */
+.statistik {
+    padding: 50px 8%;
+}
+
+.statistik h2,
+.laporan-terbaru h2 {
+    margin-bottom: 25px;
+}
+
+.statistik-container {
+    display: flex;
+    gap: 20px;
+}
+
+.statistik-card {
+    background-color: white;
+    padding: 25px;
+    flex: 1;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.statistik-card h3 {
+    color: #660033;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+
+/* TABEL LAPORAN */
+.laporan-terbaru {
+    padding: 0 8% 50px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+th,
+td {
+    padding: 15px;
+    border-bottom: 1px solid #dddddd;
+    text-align: left;
+}
+
+th {
+    background-color: #660033;
+    color: white;
+}
+
+td[colspan="5"] {
+    text-align: center;
+    color: #777777;
+}
+
+
+/* LINK LAPORAN */
+.lihat-semua {
+    display: inline-block;
+    margin-top: 20px;
+    color: #660033;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/* FOOTER */
+.footer {
+    background-color: #660033;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
