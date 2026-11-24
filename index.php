@@ -10,21 +10,85 @@
 <body>
 
     <!-- NAVBAR -->
-    <div class="navbar">
 
-        <h2 class="logo">LaporKampus</h2>
+<div class="navbar">
 
-        <ul>
-            <li><a href="index.php" class="active">Beranda</a></li>
-            <li><a href="form.php">Buat Laporan</a></li>
-            <li><a href="data.php">Data Laporan</a></li>
-            <li><a href="kategori.php">Kategori</a></li>
-        </ul>
-
+    <!-- LOGO -->
+    <div class="logo">
+        <h2>LaporKampus</h2>
     </div>
 
+    <!-- MENU NAVBAR -->
+    <ul>
 
-    <!-- BAGIAN PEMBUKA -->
+        <li>
+            <a href="index.php">Beranda</a>
+        </li>
+
+        <li>
+            <a href="form.php">Buat Laporan</a>
+        </li>
+
+        <li>
+            <a href="data.php">Data Laporan</a>
+        </li>
+
+        <!-- DROPDOWN KATEGORI -->
+        <li class="dropdown">
+
+            <details>
+                <summary>Kategori</summary>
+
+                <ul class="dropdown-content">
+
+                    <li>
+                        <a href="kategori.php?kategori=elektronik">
+                            Elektronik
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="kategori.php?kategori=perabot">
+                            Perabot
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="kategori.php?kategori=kelistrikan">
+                            Kelistrikan
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="kategori.php?kategori=bangunan">
+                            Bangunan
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="kategori.php?kategori=sanitasi">
+                            Sanitasi
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="kategori.php?kategori=komputer-jaringan">
+                            Komputer dan Jaringan
+                        </a>
+                    </li>
+
+                </ul>
+
+            </details>
+
+        </li>
+
+    </ul>
+
+</div>
+
+
+
     <div class="banner">
 
         <h1>Laporkan Kerusakan Fasilitas Kampus</h1>
