@@ -1,4 +1,21 @@
+<?php
+include 'koneksi.php';
 
+$cari   = $_GET['cari'] ?? '';
+$status = $_GET['status'] ?? '';
+
+$query = "SELECT * FROM laporan WHERE 1=1";
+if ($cari !== '') {
+    $cari_aman = mysqli_real_escape_string($conn, $cari);
+    $query .= " AND (nama_fasilitas LIKE '%$cari_aman%' OR nomor_laporan LIKE '%$cari_aman%')";
+}
+if ($status !== '') {
+    $status_aman = mysqli_real_escape_string($conn, $status);
+    $query .= " AND LOWER(status) = LOWER('$status_aman')";
+}
+$query .= " ORDER BY id DESC";
+$result = mysqli_query($conn, $query);
+?>
 <!DOCTYPE html>
 <html lang="id">
 
@@ -100,38 +117,40 @@
 
         <!-- PENCARIAN DAN FILTER -->
 
-        <div class="filter-container">
+        <form method="GET" action="data.php" class="filter-container">
 
             <div class="pencarian">
 
                 <input
                     type="text"
+                    name="cari"
+                    value="<?= htmlspecialchars($cari); ?>"
                     placeholder="Cari berdasarkan judul atau nomor laporan..."
                 >
 
-                <button type="button">Cari</button>
+                <button type="submit">Cari</button>
 
             </div>
 
             <div class="filter-status">
 
-                <select>
+                <select name="status" onchange="this.form.submit()">
 
                     <option value="">Semua Status</option>
 
-                    <option value="menunggu">Menunggu</option>
+                    <option value="menunggu" <?= $status == 'menunggu' ? 'selected' : ''; ?>>Menunggu</option>
 
-                    <option value="diproses">Diproses</option>
+                    <option value="diproses" <?= $status == 'diproses' ? 'selected' : ''; ?>>Diproses</option>
 
-                    <option value="selesai">Selesai</option>
+                    <option value="selesai" <?= $status == 'selesai' ? 'selected' : ''; ?>>Selesai</option>
 
-                    <option value="ditolak">Ditolak</option>
+                    <option value="ditolak" <?= $status == 'ditolak' ? 'selected' : ''; ?>>Ditolak</option>
 
                 </select>
 
             </div>
 
-        </div>
+        </form>
 
 
         <!-- TABEL RIWAYAT LAPORAN -->
@@ -172,23 +191,54 @@
 
                     <!-- DATA LAPORAN DARI DATABASE AKAN DITAMPILKAN DI SINI -->
 
-                    <tr>
+                    <?php if (mysqli_num_rows($result) > 0) : ?>
 
-                        <td colspan="7" class="data-kosong">
+                        <?php $no = 1; while ($row = mysqli_fetch_assoc($result)) : ?>
 
-                            <div class="kosong-icon">
-                                &#128196;
-                            </div>
+                            <tr>
 
-                            <p>Belum ada laporan</p>
+                                <td><?= $no++; ?></td>
 
-                            <span>
-                                Data laporan akan ditampilkan di sini.
-                            </span>
+                                <td><?= htmlspecialchars($row['nomor_laporan']); ?></td>
 
-                        </td>
+                                <td><?= htmlspecialchars($row['nama_fasilitas']); ?></td>
 
-                    </tr>
+                                <td><?= htmlspecialchars($row['tanggal']); ?></td>
+
+                                <td><?= htmlspecialchars($row['lokasi']); ?></td>
+
+                                <td><?= htmlspecialchars($row['status']); ?></td>
+
+                                <td>
+                                    <a href="detail.php?id=<?= $row['id']; ?>">Detail</a> |
+                                    <a href="hapus.php?id=<?= $row['id']; ?>" onclick="return confirm('Yakin hapus laporan ini?')">Hapus</a>
+                                </td>
+
+                            </tr>
+
+                        <?php endwhile; ?>
+
+                    <?php else : ?>
+
+                        <tr>
+
+                            <td colspan="7" class="data-kosong">
+
+                                <div class="kosong-icon">
+                                    &#128196;
+                                </div>
+
+                                <p>Belum ada laporan</p>
+
+                                <span>
+                                    Data laporan akan ditampilkan di sini.
+                                </span>
+
+                            </td>
+
+                        </tr>
+
+                    <?php endif; ?>
 
                 </tbody>
 

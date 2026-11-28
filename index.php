@@ -1,4 +1,12 @@
+<?php
+include 'koneksi.php';
 
+$total    = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS jml FROM laporan"))['jml'];
+$menunggu = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS jml FROM laporan WHERE status='Menunggu'"))['jml'];
+$diproses = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS jml FROM laporan WHERE status='Diproses'"))['jml'];
+$selesai  = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) AS jml FROM laporan WHERE status='Selesai'"))['jml'];
+$terbaru  = mysqli_query($conn, "SELECT * FROM laporan ORDER BY id DESC LIMIT 5");
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -113,22 +121,22 @@
         <div class="statistik-container">
 
             <div class="statistik-card">
-                <h3>-</h3>
+                <h3><?= $total; ?></h3>
                 <p>Total Laporan</p>
             </div>
 
             <div class="statistik-card">
-                <h3>-</h3>
+                <h3><?= $menunggu; ?></h3>
                 <p>Menunggu</p>
             </div>
 
             <div class="statistik-card">
-                <h3>-</h3>
+                <h3><?= $diproses; ?></h3>
                 <p>Sedang Diproses</p>
             </div>
 
             <div class="statistik-card">
-                <h3>-</h3>
+                <h3><?= $selesai; ?></h3>
                 <p>Selesai</p>
             </div>
 
@@ -152,9 +160,27 @@
                 <th>Status</th>
             </tr>
 
-            <tr>
-                <td colspan="5">Belum ada laporan.</td>
-            </tr>
+            <?php if (mysqli_num_rows($terbaru) > 0) : ?>
+
+                <?php $no = 1; while ($row = mysqli_fetch_assoc($terbaru)) : ?>
+
+                    <tr>
+                        <td><?= $no++; ?></td>
+                        <td><?= htmlspecialchars($row['nama_fasilitas']); ?></td>
+                        <td><?= htmlspecialchars($row['lokasi']); ?></td>
+                        <td><?= htmlspecialchars($row['tanggal']); ?></td>
+                        <td><?= htmlspecialchars($row['status']); ?></td>
+                    </tr>
+
+                <?php endwhile; ?>
+
+            <?php else : ?>
+
+                <tr>
+                    <td colspan="5">Belum ada laporan.</td>
+                </tr>
+
+            <?php endif; ?>
 
         </table>
 

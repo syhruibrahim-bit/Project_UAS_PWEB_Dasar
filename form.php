@@ -103,7 +103,7 @@
     <!-- FORM LAPORAN -->
     <div class="form-container">
 
-        <form action="#" method="POST" enctype="multipart/form-data">
+        <form action="proses_tambah.php" method="POST" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label>Nama Pelapor</label>
